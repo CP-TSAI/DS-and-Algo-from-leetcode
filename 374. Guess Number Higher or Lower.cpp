@@ -7,17 +7,13 @@ class Solution {
 public:
     int guessNumber(int n) {
         if(guess(n) == 0) return n;
-        int min = 1, max = n, med = min + (max - max) / 2;
-        while(max > min){
-            if(guess(med) == 0) return med;
-            if(guess(med) == -1){ // you should guess smaller
-                max = med;
-                med = min + (max-min) / 2;
-            }
-            if(guess(med) == 1){ // you should guess larger
-                min = med;
-                med = min + (max-min) / 2;
-            }
+        int min = 1;
+        int max = n;
+        while(min < max){
+            int mid = min + (max-min) / 2 s;
+            if(guess(mid) == 1) min = mid;
+            else if(guess(mid) == -1) max = mid;
+            else return mid;
         }
     }
 };
