@@ -1,28 +1,16 @@
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
-        vector<int> intersect;
-        vector<int> longer;
-        vector<int> shorter;
-        if(nums1.size() >= nums2.size())
-        {
-            longer = nums1;
-            shorter = nums2;
+        unordered_map<int, int> m;
+        for(auto i: nums1) m[i]++;
+        
+        vector<int> res;
+        for(auto i: nums2){
+            if(m[i] != 0) res.push_back(i);
         }
-        else
-        {
-            longer = nums2;
-            shorter = nums1;
-        }
-        for(auto i : shorter)
-        {
-            auto iter = find(longer.begin(), longer.end(), i);
-            if(iter != longer.end())
-                intersect.push_back(i);
-        }
-        sort(intersect.begin(), intersect.end());
-        auto it = unique(intersect.begin(), intersect.end());
-        intersect.erase(it, intersect.end());
-        return intersect;
+        sort(res.begin(), res.end());
+        auto iter = unique(returnes.begin(), res.end());
+        res.erase(iter, res.end());
+        return res;
     }
 };
