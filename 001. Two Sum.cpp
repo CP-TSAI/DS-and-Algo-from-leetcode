@@ -1,22 +1,17 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> res; 
-        vector<pair<int, int>> ori;
+        vector<pair<int, int>> num_pose; // num, pose
         for(int i = 0; i < nums.size(); i++)
-            ori.push_back({nums[i], i});
-        
-        sort(ori.begin(), ori.end());
-        int start = 0;
-        int end = nums.size()-1;
-        while(1){
-            if(ori[start].first + ori[end].first < target) start++;
-            else if(ori[start].first + ori[end].first > target) end--;
-            else {
-                res.push_back(ori[start].second);
-                res.push_back(ori[end].second);
-                return res;
-            }
+            num_pose.push_back({nums[i], i});
+        sort(num_pose.begin(), num_pose.end());
+        int left = 0;
+        int right = nums.size() - 1;
+        while(left < right){
+            int sum = num_pose[left].first + num_pose[right].first;
+            if(sum < target) left++;
+            else if(sum > target) right--;
+            else return {num_pose[left].second, num_pose[right].second};
         }
     }
 };
