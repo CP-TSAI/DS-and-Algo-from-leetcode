@@ -1,22 +1,20 @@
 class Solution {
 public:
     bool isValid(string s) {
+        if(s.size() % 2 != 0) return false;
+        if(s.empty()) return true;
         stack<char> stk;
-        for(auto &i : s){
-            if(i == '(' || i == '[' || i == '{') stk.push(i);
-            else{
-                if(stk.empty()) return false; // for the case : input = "]"
-                else if(!isPair(stk.top(), i)) return false;
-                else stk.pop();
-            }
+        for(char c: s){
+            if(c == '{' || c == '[' || c == '(') stk.push(c);
+            else if(!stk.empty() && isPair(stk.top(), c)) stk.pop();
+            else return false;
         }
-        if(stk.empty()) return true;
-        else return false; // for the case : input = "["
+        return stk.empty() ? true : false;
     }
-    bool isPair(char c1, char c2){
-        if(c1 == '(' && c2 == ')') return true;
-        if(c1 == '[' && c2 == ']') return true;
-        if(c1 == '{' && c2 == '}') return true;
+    bool isPair(int left, int right){
+        if(left == '{' && right == '}') return true;
+        if(left == '[' && right == ']') return true;
+        if(left == '(' && right == ')') return true;
         return false;
     }
 };
