@@ -1,48 +1,62 @@
 class Solution {
 public:
     string reverseVowels(string s) {
-        vector<char> vowel;
-        for(auto &i : s){
-            if(i == 'A' || i == 'E' || i == 'I' || i == 'O' || i == 'U'
-              || i == 'a' || i == 'e' || i == 'i' || i == 'o' || i == 'u'){
-                vowel.push_back(i);
+        // method 0: stack
+        stack<char> vowel;
+        for(auto &i : s)
+        {
+            if(isVowel(i))
+            {
+                vowel.push(i);
             }
         }
-        int cnt = vowel.size() - 1;
-        for(auto &i : s){
-            if(i == 'A' || i == 'E' || i == 'I' || i == 'O' || i == 'U'
-              || i == 'a' || i == 'e' || i == 'i' || i == 'o' || i == 'u'){
-                i = vowel[cnt];
-                cnt--;
+        for(auto &i : s)
+        {
+            if(isVowel(i))
+            {
+                i = vowel.top();
+                vowel.pop();
             }
         }
         return s;
+
+
+        // method 1: two pointer
+        // int left = 0; 
+        // int right = s.size() - 1;
+        // while(left < right){
+        //     while(!isVowel(s[left]) && left < right) left++;
+        //     while(!isVowel(s[right]) && left < right) right--;
+        //     swap(s[left], s[right]);
+        //     left++;
+        //     right--;
+        // }
+        // return s;
+        
+        
+        // method 2: array
+        // vector<char> vowel;
+        // for(auto &i : s){
+        //     if(isVowel(i)){
+        //         vowel.push_back(i);
+        //     }
+        // }
+        // int cnt = vowel.size() - 1;
+        // for(auto &i : s){
+        //     if(isVowel(i)){
+        //         i = vowel[cnt];
+        //         cnt--;
+        //     }
+        // }
+
+        // return s;
+    }
+
+    bool isVowel(char i){
+        if(i == 'A' || i == 'E' || i == 'I' || i == 'O' || i == 'U'
+              || i == 'a' || i == 'e' || i == 'i' || i == 'o' || i == 'u')
+            return true;
+        return false;
+
     }
 };
-
-// 法二
-// class Solution {
-// public:
-//     string reverseVowels(string s) {
-//         stack<char> vowel;
-//         for(auto &i : s)
-//         {
-//             if(i == 'a' || i == 'e' || i == 'i' || i == 'o' || i == 'u' ||
-//                i == 'A' || i == 'E' || i == 'I' || i == 'O' || i == 'U')
-//             {
-//                 vowel.push(i);
-//             }
-//         }
-//         for(auto &i : s)
-//         {
-//             if(i == 'a' || i == 'e' || i == 'i' || i == 'o' || i == 'u' || 
-//                 i == 'A' || i == 'E' || i == 'I' || i == 'O' || i == 'U')
-//             {
-//                 i = vowel.top();
-//                 vowel.pop();
-//             }
-//         }
-//         return s;
-//     }
-        
-// };
