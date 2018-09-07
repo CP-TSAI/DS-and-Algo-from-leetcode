@@ -1,12 +1,13 @@
 class Solution {
 public:
     bool checkPerfectNumber(int num) {
-        if(num <= 1) return false;
-        int tmp = 1;
+        if(num == 1) return false;
+        int sum = 1;
         for(int i = 2; i * i <= num; i++){
-            if(num % i == 0) tmp = tmp + i + num / i;
-            if(i * i == num) tmp = tmp - i;
+            if(num % i == 0) sum += (i + num / i);
+            if(i * i == num) sum -= 1;
+            if(sum > num) return false;
         }
-        return tmp == num ? true : false;
+        return sum == num ? true : false;
     }
 };
